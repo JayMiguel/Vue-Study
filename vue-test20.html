@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>keyup</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--按下Ctrl+鼠标点击才会触发方法
+        .ctrl是Ctrl组合按键事件
+    -->
+    <p @click.ctrl="doThis">监听Ctrl键+鼠标点击</p>
+    <!--按下enter键时才触发，输入的文本会变红色-->
+    监听Enter键：<input @keyup.enter="doThis"/>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        methods: {
+            doThis() {
+                event.target.style.color = "red";
+            }
+        }
+    })
+</script>
+</body>
+</html>
+

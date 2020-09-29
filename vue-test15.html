@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染: v-show</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>
+        v-show只是隐藏元素，但是元素还存在于HTML模板中，
+        也就是只改变元素的display属性。
+    </p>
+    <h1 v-show="flag">Hello!</h1><br/>
+    <button type="button" @click="changeFlag">Change show</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true
+        },
+        methods: {
+            changeFlag() {
+                this.flag = !this.flag;
+            }
+        }
+    })
+</script>
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Style绑定</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p style="color: red">
+        v-if与v-else渲染的模板，如果返回值为假，该部分元素不会出现在渲染后的HTML模板中。
+    </p>
+    <!--当 v-bind:style 使用需要添加浏览器引擎前缀的 CSS property 时，如 transform，Vue.js 会自动侦测并添加相应的前缀。-->
+    <!--绑定内联样式-->
+    <div v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">Hi</div>
+    <!--直接绑定对象，看起来更清晰-->
+    <div v-bind:style="styleObject">Hello</div>
+    <!--内联样式结合计算属性使用-->
+    <div v-bind:style="{fontSize: myFontSize}">GoodBye</div>
+    <!--使用数组语法绑定多个对象-->
+    <div v-bind:style="[styleObject, otherStyle]">Morning</div>
+    <!--为 style 绑定中的 property 提供一个包含多个值的数组，常用于提供多个带前缀的值-->
+    <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">Afternoon</div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            activeColor: 'red',
+            fontSize: 70,
+            styleObject: {
+                color: 'red',
+                fontSize: '30px'
+            },
+            otherStyle: {
+                textDecoration: 'underline'
+            }
+        },
+        computed: {
+            myFontSize() {
+                return this.fontSize - 30 + 'px';
+            }
+        }
+    })
+</script>
+</body>
+</html>
+

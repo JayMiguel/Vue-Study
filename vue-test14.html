@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染: 用key管理可复用的元素</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p style="color: red">
+        不使用key管理，每次切换模板时，Vue会复用相同的元素，所以用户输入的值会保留在输入框中
+    </p>
+    <template v-if="loginType1 === 'username'">
+        <label>Username</label>
+        <input type="text" placeholder="Please enter your username">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input type="text" placeholder="Please enter your email address">
+    </template>
+    <p>
+        <button type="button" @click="changeLoginType1">Toggle login type</button>
+    </p>
+
+    <p style="color: red">
+        为元素指定key，表示这两个元素完全独立，每次切换模板时，Vue不会复用，所以用户输入的值会被清空
+    </p>
+    <template v-if="loginType2 === 'username'">
+        <label>Username</label>
+        <input type="text" placeholder="Please enter your username" key="username-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input type="text" placeholder="Please enter your email address" key="email-input">
+    </template>
+    <p>
+        <button type="button" @click="changeLoginType2">Toggle login type</button>
+    </p>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            loginType1: 'username',
+            loginType2: 'username'
+        },
+        methods: {
+            changeLoginType1() {
+                if (this.loginType1 == 'username') {
+                    this.loginType1 = 'email';
+                } else {
+                    this.loginType1 = 'username';
+                }
+            },
+            changeLoginType2() {
+                if (this.loginType2 == 'username') {
+                    this.loginType2 = 'email';
+                } else {
+                    this.loginType2 = 'username';
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
+

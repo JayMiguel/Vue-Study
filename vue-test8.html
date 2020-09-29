@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind绑定驼峰命名属性</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--viewBox是svg标签的属性，这个属性是驼峰形式，想让v-bind正常绑定，要用-分割并且用.camel修饰-->
+        <svg :view-box.camel="viewBox" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="100%" height="100%"/>
+            <circle cx="50%" cy="50%" r="4" fill="white"/>
+        </svg>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                viewBox: '0 0 100 100'
+            }
+        })
+    </script>
+</body>
+</html>
+

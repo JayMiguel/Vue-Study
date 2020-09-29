@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态参数绑定</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--
+            2.6+ 新增的动态写法
+            这里只支持全部小写
+        -->
+        <a :[dynamickey]="hrefLink">2.6+增加的动态key</a>
+        <!--上面的dynamickey会被赋值为href，所以相当于<a :href="http://www.baidu.com">2.6+增加的动态key</a>-->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                hrefLink: 'http://www.baidu.com',
+                dynamickey: 'href'
+            }
+        })
+    </script>
+</body>
+</html>
+

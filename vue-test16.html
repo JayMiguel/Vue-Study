@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <ul id="example-1">
+        <li v-for="item in items" :key="item.message">
+            {{item.message}}
+        </li>
+    </ul>
+
+    <ul id="example-2">
+        <li v-for="(item,index) in items" :key="item.message">
+            {{parentMessage}} - {{index}} - {{item.message}}
+        </li>
+    </ul>
+
+    <ul id="v-for-object1" class="demo">
+        <li v-for="value in object">
+            {{ value }}
+        </li>
+    </ul>
+    <div id="v-for-object2" >
+        <div v-for="(value,name,index) in object">
+            {{index}}. {{name}}: {{value}}
+        </div>
+    </div>
+<script>
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            items: [
+                {message: 'foo'},
+                {message: 'bar'}
+            ]
+        }
+    })
+
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            parentMessage: 'parent',
+            items: [
+                {message: 'foo'},
+                {message: 'bar'}
+            ]
+        }
+    })
+
+    var vForObject1 = new Vue({
+        el: '#v-for-object1',
+        data: {
+            object: {
+                title: 'How to do lists in Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            }
+        }
+    })
+
+    var vForObject2 = new Vue({
+        el: '#v-for-object2',
+        data: {
+            object: {
+                title: 'How to do lists in Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--v-bind绑定单个属性-->
+        <a v-bind:href="url" v-bind:title="title">v-bind的缩写是冒号:</a>
+        <!--以下写法不能用冒号:缩写-->
+        <!--v-bind绑定一组数据，无法动态更改-->
+        <a v-bind='{id:"vid", href: "http://www.baidu.com"}'>测试1</a>
+        <!--v-bind绑定对象-->
+        <a v-bind='attrObj'>测试2</a>
+        <!--v-bind绑定一组数据，可以动态更改-->
+        <a v-bind="{id:aId, href:aHref}">测试3</a>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                url: 'http://www.baidu.com',
+                title: '百度',
+                attrObj: {id: 'attrId', href: 'http://www.baidu.com'}
+                aId: 'aId',
+                aHref: 'www.baidu.com'
+            }
+        })
+    </script>
+</body>
+</html>
+

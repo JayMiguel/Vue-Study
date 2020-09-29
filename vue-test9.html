@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+        <p>now: "{{now}}"</p>
+        <p>{{fullName}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello',
+                firstName: '',
+                lastName: ''
+            },
+            computed: { // 计算属性与方法不同，在第一次计算后，只要响应式依赖没有改变，返回值就不会变化
+                reversedMessage() {
+                    return this.message.split('').reverse().join('');
+                },
+                now() {
+                    // Date.now()不是响应式的，所以在控制台访问多少次都返回相同的值
+                    return Date.now();
+                },
+                fullName: {
+                    get() {  // getter
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    set() {  // setter
+                        let names = fullName.split(' ');
+                        this.firstName = names[0];
+                        this.lastName = names[names.length - 1];
+                    }
+                }
+            },
+            methods: {
+                // 方法每次访问都会执行一次，所以返回值都不同
+                activeNow() {
+                    return Date.now();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class绑定</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--Class绑定JSON-->
+    <div v-bind:class="{active: isActive}">Class绑定JSON</div>
+    <!--静态Class与动态绑定相结合-->
+    <div class="static" v-bind:class="{active: isActive, 'text-danger': hasError}">静态Class与动态绑定相结合</div>
+    <!--Class绑定对象-->
+    <div v-bind:class="classObject1">Class绑定对象</div>
+    <!--Class绑定计算属性-->
+    <div v-bind:class="classObject2">Class绑定计算属性</div>
+    <!--Class绑定列表-->
+    <div v-bind:class="[activeClass, errorClass]">Class绑定数组</div>
+    <!--Class列表中使用三元表达式-->
+    <div v-bind:class="[isActive? activeClass: '', errorClass]">Class列表中使用三元表达式</div>
+    <!--Class列表中使用对象语法-->
+    <div v-bind:class="[{active: isActive}, errorClass]">Class列表中使用对象语法</div>
+    <!--
+        在组件设置Class
+        下面HTML将被渲染为: <p class="foo bar baz boo">Hi</p>
+    -->
+    <my-component class="baz boo"></my-component>
+    <!--
+        带数据绑定的组件同样适用
+        下面HTML将被渲染为: <p class="foo bar active">Hi</p>
+    -->
+    <my-component v-bind:class="{active: isActive}"></my-component>
+</div>
+<script>
+    Vue.component('my-component',{
+        template: '<p class="foo bar">Hi</p>',
+        data: {
+            isActive: true
+        }
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            hasError: false,
+            classObject1: {
+                active: true,
+                'text-danger': false
+            },
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        },
+        computed: {
+            classObject2() {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
+

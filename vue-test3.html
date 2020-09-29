@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-text</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--可以给元素中间添加内容-->
+        <p v-text="msg"></p>
+        <!--会替换元素中间的内容-->
+        <p v-text="msg">这里会被覆盖</p>
+        <!--可以进行简单的运算-->
+        <p v-text="msg+1"></p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '将会被v-text渲染!'
+            }
+        })
+    </script>
+
+</body>
+</html>
+
