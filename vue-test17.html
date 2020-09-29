@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组更新检测</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <template>
+        <p>
+        <div v-for="(item,index) in items1" v-bind:key="item.index">
+            {{index}}. {{item.name}}
+        </div>
+        <button type="button" @click="pushItem">Push item</button>
+        </p>
+    </template>
+
+    <template>
+        <p>
+            <div v-for="(item,index) in items" v-bind:key="item.index">
+                {{index}}. {{item.name}}
+            </div>
+        </p>
+    </template>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            items1: [
+                {name: 'Tony'},
+                {name: 'Gogo'},
+                {name: 'Jenny'}
+            ],
+            items2: [
+                {name: 'Jony'},
+                {name: 'Joe'},
+                {name: 'Sally'},
+                {name: 'Ken'}
+            ]
+        },
+        computed: {
+            // 非变更方法，不会改变原数组，而是返回新数组
+            // 例如：filter, concat, slice
+            items: function () {
+                return this.items2.filter(function (item) {
+                    return item.name.match('Jo');
+                })
+            }
+        },
+        methods: {
+            // 变更方法，会改变原数组
+            // 例如：push, pop, shift, unshift, splice, sort, reverse
+            pushItem() {
+                this.items1.push({name: 'item' + Math.random()});
+            }
+        }
+    })
+
+</script>
+</html>
+
