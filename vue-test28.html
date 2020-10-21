@@ -8,13 +8,13 @@
 </head>
 <body>
 <div id="app">
+    <!--向组件传递固定值-->
     <blog-post title="My journey with Vue"></blog-post>
     <blog-post title="Blogging with Vue"></blog-post>
     <blog-post title="Why Vue is so fun"></blog-post>
-
-
 </div>
 <div id="blog-post-demo">
+    <!--向组件传递变量，通过v-for多次使用组件-->
     <blog-post v-for="post in posts" :key="post.id" :title="post.title"></blog-post>
 </div>
 <script>
