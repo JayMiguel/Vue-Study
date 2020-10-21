@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model高级使用</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--用v-for渲染的动态选项-->
+    <select v-model="selected1">
+        <option v-for="option in options" v-bind:value="option.value">
+            {{ option.text }}
+        </option>
+    </select>
+    <span>Selected: {{ selected1 }}</span>
+
+    <select v-model="selected2" v-on:change="showChange">
+        <!-- 内联对象字面量 -->
+        <option v-bind:value="{ number: 123 }">123</option>
+    </select>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            selected1: 'A',
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ],
+            selected2: {},
+        },
+        methods: {
+            showChange() {
+                // 当选中时
+                alert(typeof vm.selected2); // => 'object'
+                alert(vm.selected2.number); // => 123
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
