@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件基础</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="components-demo">
+        <!--全局注册的组件可以在一个通过new Vue创建的Vue根实例中使用。-->
+        <button-counter></button-counter>
+    </div>
+</div>
+<script>
+    // 全局注册组件
+    Vue.component('button-counter', {
+        // 组件的data必须是函数，否则会影响该组件的其他实例
+        data() {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">You click me {{count}} times.</button>'
+    });
+
+    new Vue({el: '#components-demo'});
+</script>
+</body>
+</html>
+
