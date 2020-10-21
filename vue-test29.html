@@ -21,6 +21,7 @@
 <script>
     Vue.component('blog-post', {
         props: ['post'],
+        // 内置的$emit方法执行相应的js代码
         template: '<div class="blog-post">\
                     <h3>{{post.title}}</h3>\
                     <button v-on:click="$emit(\'enlarge-text\')">Enlarge text</button>\
