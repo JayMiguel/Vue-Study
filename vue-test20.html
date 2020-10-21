@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for与v-if一同使用</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--
+        v-for 的优先级比 v-if 更高，
+        这意味着v-if将分别重复运行于每个v-for循环中。
+        当你只想为部分项渲染节点时，
+        这种优先级的机制会十分有用
+      -->
+    <li v-for="todo in todos" v-if="!todo.isComplated">
+        {{todo}}
+    </li>
+
+    <!--如果你的目的是有条件地跳过循环的执行，那么可以将 v-if 置于外层元素-->
+    <ul v-if="todos.length">
+        <li v-for="todo in todos">
+            {{todo}}
+        </li>
+    </ul>
+    <p v-else>No todos left!</p>
+</div>
+</body>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            todos:[
+                {item:'开发前台模块', isComplated: false},
+                {item:'开发中台模块', isComplated: true},
+                {item:'开发后台模块', isComplated: false}
+            ]
+        }
+    })
+
+</script>
+</html>
+
