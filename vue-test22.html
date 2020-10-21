@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--可以用 v-on 指令监听 DOM 事件，并在触发时运行一些 JavaScript 代码。-->
+    <div id="example-1">
+        <button v-on:click="counter += 1">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+
+    <!--v-on 还可以接收一个需要调用的方法名称。-->
+    <div id="example-2">
+        <!--greet是在下面定义的方法名-->
+        <button v-on:click="greet">Greet</button>
+    </div>
+</div>
+</body>
+<script>
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            counter: 0
+        }
+    })
+
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            name: 'Vue.js'
+        },
+        methods: {
+            greet(event) {
+                //'this'在这里指当前Vue对象
+                alert('Hello ' + this.name + '!');
+                //'event'是原生DOM事件
+                if (event) {
+                    alert(event.target.tagName);
+                }
+            }
+        }
+    })
+
+    // 也可以直接走JavaScript调用方法
+    example2.greet() // => 'Hello Vue.js!'
+</script>
+</html>
+
