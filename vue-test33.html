@@ -17,6 +17,12 @@
     <common-span v-slot:default="properties">
         {{properties.user.lastName}}
     </common-span>
+    <br>
+    <!--这种情况的写法还能更简单-->
+    <common-span v-slot="properties">
+        {{properties.user.lastName}}
+    </common-span>
+
 </div>
 <script>
     Vue.component('common-span', {
