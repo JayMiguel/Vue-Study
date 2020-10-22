@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解构插槽Prop</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--v-slot的值实际上可以是任意Javascript表达式-->
+    <common-span v-slot:default="{user}">
+        {{user.firstName}}
+    </common-span>
+    <br>
+    <!--还可以将插槽Prop重命名-->
+    <common-span v-slot:default="{user:person}">
+        {{person.firstName}}
+    </common-span>
+    <br>
+    <!--可以为插槽Prop设置默认值-->
+    <common-span>
+        <template #first="{user={firstName: 'Miguel'}}">{{user.firstName}}</template>
+    </common-span>
+</div>
+<script>
+    Vue.component('common-span', {
+        data() {
+            return {
+                user: {
+                    firstName: 'Jay',
+                    lastName: 'Zhou'
+                }
+            }
+        },
+        template: '<span>\
+                        <slot name="first">\
+                            111111\
+                        </slot>\
+                        <slot :user="user">\
+                            {{user.lastName}}\
+                        </slot>\
+                   </span>'
+    });
+
+    new Vue({
+        el: '#app',
+    });
+
+</script>
+</body>
+</html>
+
