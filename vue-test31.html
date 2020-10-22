@@ -19,11 +19,13 @@
                 return this.value;
             }
         },
-        template: '<input \
-                    v-bind:value="value"\
-                    v-on:input="$emit(\'input\',$event.target.value)"\
-                    />\
-                    <span>{{inputText}}</span>'
+        template: '<div class="container">\
+                        <input \
+                        v-bind:value="value"\
+                        v-on:input="$emit(\'input\',$event.target.value)"\
+                        />\
+                        <span>{{inputText}}</span>\
+                    </div>'
     });
 
     new Vue({
