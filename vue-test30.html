@@ -7,22 +7,28 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-<div id="blog-posts-events-demo">
-    <div :style="{fontSize: postFontSize + 'em'}">
-        <blog-post
-                v-for="post in posts"
-                :key="post.id"
-                :post="post"
-                @enlarge-text="postFontSize += $event"
-        >
-        </blog-post>
-        <blog-post
-                v-for="post in posts"
-                :key="post.id"
-                :post="post"
-                @enlarge-text="onEnlargeText"
-        >
-        </blog-post>
+<div>
+    <div id="blog-posts-events-demo1">
+        <div :style="{fontSize: postFontSize + 'em'}">
+            <blog-post
+                    v-for="post in posts"
+                    :key="post.id"
+                    :post="post"
+                    @enlarge-text="postFontSize += $event"
+            >
+            </blog-post>
+        </div>
+    </div>
+    <div id="blog-posts-events-demo2">
+        <div :style="{fontSize: postFontSize + 'em'}">
+            <blog-post
+                    v-for="post in posts"
+                    :key="post.id"
+                    :post="post"
+                    @enlarge-text="onEnlargeText"
+            >
+            </blog-post>
+        </div>
     </div>
 </div>
 <script>
@@ -36,7 +42,19 @@
     });
 
     new Vue({
-        el: '#blog-posts-events-demo',
+        el: '#blog-posts-events-demo1',
+        data: {
+            posts: [
+                {id: 4, title: 'My journey with Vue'},
+                {id: 5, title: 'Blogging with Vue'},
+                {id: 6, title: 'Why Vue is so fun'}
+            ],
+            postFontSize: 1
+        }
+    });
+
+    new Vue({
+        el: '#blog-posts-events-demo2',
         data: {
             posts: [
                 {id: 1, title: 'My journey with Vue'},
@@ -47,7 +65,7 @@
         },
         methods: {
             onEnlargeText(enlargeAmount) {
-                this.postFontSize + enlargeAmount;
+                this.postFontSize += enlargeAmount;
             }
         }
     });
