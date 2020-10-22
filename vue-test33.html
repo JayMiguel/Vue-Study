@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域插槽</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <common-span>
+        <!--自定义的slotProps用于获取所有插槽prop-->
+        <template v-slot:default="slotProps">{{slotProps.user.firstName}}</template>
+    </common-span>
+    <br>
+    <!--当组件中只有默认插槽时，可以把组件标签当作插槽的模板使用-->
+    <common-span v-slot:default="properties">
+        {{properties.user.lastName}}
+    </common-span>
+</div>
+<script>
+    Vue.component('common-span', {
+        data() {
+            return {
+                user: {
+                    firstName: 'Jay',
+                    lastName: 'Zhou'
+                }
+            }
+        },
+        template: '<span>\
+                        <slot :user="user">\
+                            {{user.lastName}}\
+                        </slot>\
+                   </span>'
+    });
+
+    new Vue({
+        el: '#app',
+
+    });
+
+</script>
+</body>
+</html>
+
