@@ -8,18 +8,19 @@
 </head>
 <body>
 <div id="app">
-    <common-span>
-        <template #[dynamicSlotName]="{user}">
-            <h1>{{user.firstName}}</h1>
+    <base-layout>
+        <!--这里的变量名不能使用驼峰命名，只支持全部小写-->
+        <template v-slot:[slotname]="slotProps">
+            <h1>{{slotProps.user.firstName}}</h1>
         </template>
-    </common-span>
+    </base-layout>
     <button @click="changeHeader">Header</button>
     <button @click="changeMain">main</button>
     <button @click="changeFooter">footer</button>
 </div>
 
 <script>
-    var commonSpan = {
+    var baseLayout = {
         data() {
             return {
                 user: {
@@ -27,44 +28,36 @@
                 }
             }
         },
-        template: '<div>\
-                        <span>\
-                            <div>\
-                                <slot :user="user" name="header">\
-                                    This is header\
-                                </slot>\
-                            </div><br>\
-                            <div>\
-                                <slot :user="user" name="main">\
-                                    This is main\
-                                </slot><br>\
-                            </div><br>\
-                            <div>\
-                                <slot :user="user" name="footer">\
-                                    This is footer\
-                                </slot>\
-                            </div><br>\
-                        </span>\
+        template: '<div class="container">\
+                      <header>\
+                        <slot :user="user" name="header">This is header.</slot>\
+                      </header>\
+                      <main>\
+                        <slot :user="user" name="main">This is main.</slot>\
+                      </main>\
+                      <footer>\
+                        <slot :user="user" name="footer">This is footer.</slot>\
+                      </footer>\
                     </div>'
     };
 
     new Vue({
         el: '#app',
         components: {
-            commonSpan
+            baseLayout
         },
         data: {
-            dynamicSlotName: 'header'
+            slotname: 'header'
         },
         methods: {
             changeHeader() {
-                this.dynamicSlotName = 'header'
+                this.slotname = 'header'
             },
             changeMain() {
-                this.dynamicSlotName = 'main'
+                this.slotname = 'main'
             },
             changeFooter() {
-                this.dynamicSlotName = 'footer'
+                this.slotname = 'footer'
             }
         }
     });
