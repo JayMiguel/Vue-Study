@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态插槽名</title>
+    <!--导入Vue cdn的网址-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <common-span>
+        <template #[dynamicSlotName]="{user}">
+            <h1>{{user.firstName}}</h1>
+        </template>
+    </common-span>
+    <button @click="changeHeader">Header</button>
+    <button @click="changeMain">main</button>
+    <button @click="changeFooter">footer</button>
+</div>
+
+<script>
+    var commonSpan = {
+        data() {
+            return {
+                user: {
+                    firstName: 'Miguel'
+                }
+            }
+        },
+        template: '<div>\
+                        <span>\
+                            <div>\
+                                <slot :user="user" name="header">\
+                                    This is header\
+                                </slot>\
+                            </div><br>\
+                            <div>\
+                                <slot :user="user" name="main">\
+                                    This is main\
+                                </slot><br>\
+                            </div><br>\
+                            <div>\
+                                <slot :user="user" name="footer">\
+                                    This is footer\
+                                </slot>\
+                            </div><br>\
+                        </span>\
+                    </div>'
+    };
+
+    new Vue({
+        el: '#app',
+        components: {
+            commonSpan
+        },
+        data: {
+            dynamicSlotName: 'header'
+        },
+        methods: {
+            changeHeader() {
+                this.dynamicSlotName = 'header'
+            },
+            changeMain() {
+                this.dynamicSlotName = 'main'
+            },
+            changeFooter() {
+                this.dynamicSlotName = 'footer'
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
+
