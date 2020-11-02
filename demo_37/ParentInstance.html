@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>访问父级实例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <common-panel>
+        <template v-slot:layout>
+            <common-layout></common-layout>
+        </template>
+    </common-panel>
+</div>
+</body>
+<script>
+    Vue.component('common-panel', {
+        data(){
+            return {
+                foo: 1
+            }
+        },
+        computed: {
+            bar() {
+                return this.foo-1;
+            }
+        },
+        methods: {
+            baz() {
+                this.foo++;
+            }
+        },
+        template: '<div>\
+                      <slot name="layout"></slot>\
+                   </div>'
+    })
+
+    Vue.component('common-layout', {
+        computed: {
+            parentFoo() {
+                return this.$parent.foo;
+            },
+            parentBar() {
+                return this.$parent.bar;
+            }
+        },
+        methods: {
+            addFoo() {
+                this.$parent.baz();
+            }
+        },
+        template: '<div>\
+                      foo: <input type="text" :value="parentFoo"/><br>\
+                      bar: <input type="text" :value="parentBar"/><br>\
+                      <button @click="addFoo">foo+1</button>\
+                   </div>'
+    })
+
+    new Vue({
+        el: '#app',
+    })
+</script>
+</html>
