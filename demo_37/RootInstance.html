@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>访问根实例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <common-panel>
+        <template v-slot:layout>
+            <common-layout></common-layout>
+        </template>
+    </common-panel>
+</div>
+</body>
+<script>
+    Vue.component('common-panel', {
+        template: '<div>\
+                      <slot name="layout"></slot>\
+                   </div>'
+    })
+
+    Vue.component('common-layout', {
+        computed: {
+            rootFoo() {
+                return this.$root.foo;
+            },
+            rootBar() {
+                return this.$root.bar;
+            }
+        },
+        methods: {
+            addFoo() {
+                this.$root.baz();
+            }
+        },
+        template: '<div>\
+                      foo: <input type="text" :value="rootFoo"/><br>\
+                      bar: <input type="text" :value="rootBar"/><br>\
+                      <button @click="addFoo">foo+1</button>\
+                   </div>'
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            foo: 1
+        },
+        computed: {
+            bar() {
+                return this.foo-1;
+            }
+        },
+        methods: {
+            baz() {
+                this.foo++;
+            }
+        }
+    })
+</script>
+</html>
