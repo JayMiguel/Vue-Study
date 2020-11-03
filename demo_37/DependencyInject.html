@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>依赖注入</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<google-map id="map">
+    <google-map-region>
+        <google-map-markers></google-map-markers>
+    </google-map-region>
+</google-map>
+</body>
+</html>
+<script>
+    Vue.component('google-map-region', {
+        inject: ['getMap'],
+        data() {
+            return {
+                map: this.getMap()
+            }
+        },
+        template: '<div>\
+                     <span>region: {{map}}</span><br>\
+                     <google-map-markers></google-map-markers>\
+                   </div>'
+    })
+
+    Vue.component('google-map-markers', {
+        inject: ['getMap'],
+        data() {
+            return {
+                map: this.getMap()
+            }
+        },
+        template: '<div>\
+                     <span>marker: {{map}}</span>\
+                   </div>'
+    })
+
+    new Vue({
+        el: '#map',
+        provide() {
+            return {
+                getMap: this.getMap
+            }
+        },
+        data: {
+            map: 'This is a map'
+        },
+        methods: {
+            getMap() {
+                return this.map;
+            }
+        }
+    });
+</script>
+<style>
+</style>
