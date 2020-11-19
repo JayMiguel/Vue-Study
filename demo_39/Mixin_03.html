@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mixin</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    </div>
+</body>
+</html>
+<script>
+    // 全局混入，所有组件都会被混入
+    Vue.mixin({
+        created() {
+            let myOption = this.$options.myOption
+            if (myOption) {
+                console.log(myOption);
+            }
+        }
+    })
+
+    new Vue({
+        myOption: 'hello!'
+    })
+</script>
