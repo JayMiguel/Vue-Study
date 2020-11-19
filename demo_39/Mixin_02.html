@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mixin</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    </div>
+</body>
+</html>
+<script>
+    var mixin = {
+        data() {
+            return {
+                message: 'hello',
+                foo: 'abc'
+            }
+        }
+    }
+
+    // 混入组件后，属性会自动混入，如果属性名重复，以父组件的属性值优先。
+    new Vue({
+        mixins: [mixin],
+        data() {
+            return {
+                message: 'Goodbye',
+                bar: 'def'
+            }
+        },
+        created() {
+            console.log(this.$data); // {message: 'Goodbye', foo: 'abc', bar: 'def'}
+        }
+    })
+</script>

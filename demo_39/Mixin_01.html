@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mixin</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    </div>
+</body>
+</html>
+<script>
+    let myMixin = {
+        created: function () {
+            this.hello()
+        },
+        methods: {
+            hello: function () {
+                console.log("hello from mixin!");
+            }
+        }
+    }
+
+    let Component = Vue.extend({
+        mixins: [myMixin],
+        created() {
+            console.log("This is component.");
+        }
+    })
+
+    // 混入组件后，创建实例会先执行子组件的钩子函数
+    let component = new Component();
+    // => hello from mixin!
+    // => This is component.
+</script>
