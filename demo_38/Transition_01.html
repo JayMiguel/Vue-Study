@@ -10,6 +10,7 @@
     <button v-on:click="show = !show">
         Toggle
     </button>
+    <!--v-enter和v-leave控制过渡状态，name为fade，则类名为fade-enter-->
     <transition name="fade">
         <p v-if="show">hello</p>
     </transition>
